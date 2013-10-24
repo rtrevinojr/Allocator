@@ -5,27 +5,6 @@
 // Glenn P. Downing
 // ------------------------------------
 
-/*
-To test the program:
-    % ls -al /usr/include/gtest/
-    ...
-    gtest.h
-    ...
-
-    % locate libgtest.a
-    /usr/lib/libgtest.a
-
-    % locate libpthread.a
-    /usr/lib/x86_64-linux-gnu/libpthread.a
-    /usr/lib32/libpthread.a
-
-    % locate libgtest_main.a
-    /usr/lib/libgtest_main.a
-
-    % g++ -pedantic -std=c++0x -Wall TestAllocator.c++ -o TestAllocator -lgtest -lpthread -lgtest_main
-
-    % valgrind TestAllocator > TestAllocator.out
-*/
 
 // --------
 // includes
@@ -59,10 +38,13 @@ struct TestAllocator : testing::Test {
 typedef testing::Types<
             std::allocator<int>,
             std::allocator<double>,
-            Allocator<int, 100>
-    //        Allocator<double, 100> 
+            Allocator<int, 100>,
+            Allocator<double, 100> 
 	>
         my_types;
+
+//char a_test[N];
+
 
 TYPED_TEST_CASE(TestAllocator, my_types);
 
@@ -85,6 +67,7 @@ TYPED_TEST(TestAllocator, One) {
     }
 }
 
+/*
 TYPED_TEST(TestAllocator, Two) {
 
     typedef typename TestFixture::allocator_type allocator_type;
@@ -107,13 +90,52 @@ TYPED_TEST(TestAllocator, Two) {
 	x.construct(p, v);
 	ASSERT_EQ(v, *p);
 	//v = 3;
-	//x.construct(p, v);
-	//ASSERT_EQ(v, *p);
+	x.construct(p, v);
+	ASSERT_EQ(v, *p);
     }
 
+//    const difference_type s2 = 24;
+//    const value_type v2 = 3;
+//    const pointer p2 = x.allocate(s2);
+//
+//    if ( p != 0 ) {
+//
+//	x.construct(p2, v2);
+//	ASSERT_EQ(v2, *p2);
+//    }
+	
     //int test = *reinterpret_cast<int*> (p); 
     //ASSERT_TRUE(test == 92);  
   
+}
+*/
+
+TYPED_TEST(TestAllocator, three) {
+
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+
+    allocator_type x;
+    const difference_type s = 5;
+    const value_type      v = 2;
+    const pointer         p = x.allocate(s);
+    if (p != 0) {
+        x.construct(p, v);
+        ASSERT_EQ(v, *p);
+        //x.destroy(p);
+        //x.deallocate(p, s);
+    }   
+
+    const difference_type s2 = 3;
+    const value_type v2 = 3;
+    const pointer p2 = x.allocate(s2);
+    if (p != 0) {
+	x.construct(p2, v2);
+	ASSERT_EQ(v2, *p2);
+    }
+
 }
 
 // downing test
@@ -149,4 +171,23 @@ TYPED_TEST(TestAllocator, Ten) {
     }
 }
 
+
 */
+
+
+TYPED_TEST(TestAllocator, Eleven) {
+
+    int index = 0;
+    //a_test[0] = 0;
+    //char eletest = a_test[0];
+    //int ch_inttest = view(eletest);
+    ASSERT_TRUE(true);
+
+}
+
+
+
+
+
+
+
