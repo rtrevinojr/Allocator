@@ -93,6 +93,7 @@ class Allocator {
 		}
 
 		cout << "match_senti = " << match_senti << endl;
+		cout << "next_senti = " << next_senti << endl;
 		if (next_senti != match_senti)
 		    return false;
 
@@ -100,6 +101,7 @@ class Allocator {
 		//cout << "next_index = " << next_index << endl;
 		if (next_index < N) {	
 		    next_senti = view(next_index);
+		    cout << "next_senti = " << next_senti << endl;
 		}
 		cout << "iterate next_senti = " << next_senti << endl;
 	 	index += abs_next_senti + (2 * sizeof(int));
@@ -164,114 +166,42 @@ class Allocator {
         pointer allocate (size_type n) {
             // <your code>
 	    cout << "x.ALLOCATE(n) ------------ " << endl;
-	    //cout << "x.allocate(" << n << ") = " << view(a[0]) << endl;
 	    cout << "x.allocate(" << n << ") = " << view(0) << endl;
 	    size_type malloc_size = sizeof(T) * n;
-	    //int senti_it = view_ch(a[0]);
 	    int senti_it = view(0);
 	    int abs_senti_it = std::abs( senti_it );
 	    int index = 0;
 	    int neg_msize = -malloc_size;
-	    cout << "Initial senti_it = " << senti_it << endl;
-
-	    cout << "Find free heap space: " << endl;
 	    while (senti_it < 0) {
 		abs_senti_it = std::abs( senti_it );
-		int senti_index = abs_senti_it + 2 * sizeof(int);
-		cout << "senti_index = " << senti_index << endl;
-		//senti_it = view( a[abs_senti_it + 2 * sizeof(int)] );
+		//cout << "senti_index = " << senti_index << endl;
 		senti_it = view(abs_senti_it + 2 * sizeof(int));
-		cout << "senti_it = " << senti_it << endl;
+		//cout << "senti_it = " << senti_it << endl;
 		index += abs_senti_it + 2 * sizeof(int);
-	    	cout << "allocate index = " << index << endl;
+	    	//cout << "allocate index = " << index << endl;
 	    }
 	
-	    cout << "index = " << index << endl;
 	    int match_index = index;
 	    match_index += malloc_size + sizeof(int);
-	    cout << "match_index = " << match_index << endl;
-		
+	    //cout << "match_index = " << match_index << endl;
 	    int abs_n= std::abs(malloc_size);
-	    cout << "abs_senti_it = " << abs_n << endl;
 	    view(index) = neg_msize;
 	    view(match_index) = neg_msize;
-	    cout << "view(index) = " << view(index) << endl;
-	    cout << "view(match_index) = " << view(match_index) << endl; 
+	    //cout << "view(index) = " << view(index) << endl;
+	    //cout << "view(match_index) = " << view(match_index) << endl; 
 	    int next_free_index = index + malloc_size + 2 * sizeof(int);
-	    cout << "next_free_index = " << next_free_index << endl;
+	    //cout << "next_free_index = " << next_free_index << endl;
 	    int avail = N - next_free_index - 2 * sizeof(int);
-	    cout << "avail heap left = " << avail << endl;
+	    //cout << "avail heap left = " << avail << endl;
 	    view(next_free_index) = avail;
 	    view(next_free_index + avail) = avail;
 
 	    cout << view(next_free_index) << endl;
 	    cout << "next_free_index + avail = " << next_free_index + avail << endl;
 	    cout << view(next_free_index + avail) << endl << endl;
-/*
-	    cout << "before index = " << index << endl;
-	    if (index == 0) {
-		//view_ch( a[index] ) = neg_n;
-		view(0) = neg_n;
-		//cout << "view_ch(a[0]) = " << view_ch( a[index] ) << endl;
-		cout << "view(0) = " << view(0) << endl;
-		view(index + 4) = neg_n;
-		cout << "view(index + 4) = " << view(index + 4) << endl;
-	    }
-	    else {
-		//cout << "view( a[0] ) in not 0check  = " << view( a[0] ) << endl;	
-		cout << "neg_n matching a[index + 8] index = " << index << endl;
-		
-	        //view(a[index + 8]) = neg_n;
-		//cout << "view( a[0] ) in not 0check  = " << &view(a[0]) << endl;	
 
-		cout << "insertion index a[index] = " << index << endl; 	
-
-	    	view(index) = neg_n;
-		cout << "view(index) = " << view(index) << endl;
-		int next_index_diff = view(index);
-		cout << "next_index_diff = " << next_index_diff << endl;
-		view(index + next_index_diff) = neg_n;
-		cout << "view(index + next_index_diff) = " << view(index + next_index_diff) << endl;
-		index += next_index_diff + sizeof(int);
-	    }
-	    int avail = N - (index + n + 2 * sizeof(int));
-	    difference_type diff = avail - 2 * sizeof(int);
-
-	    if (a[index + avail - 8] < 100) {
-		//cout << "view(a[0]) check = " << view(a[0]) << endl;
-		
-                //view(a[index + avail - 2 * sizeof(int)]) = neg_n; 	
-		cout << "index + avail - 8 = " << index + avail - 8 << endl;
-		view(index + avail - 2 * sizeof(int)) = neg_n;
-		cout << "view(index + avail - 8) = " << view(index + avail - 8) << endl;
-		cout << "index + avail = " << index + avail << endl;
-		//cout << "view( a[0] ) check  = " << view( a[0] ) << endl;	
-		//cout << view_ch( a[0] ) << endl;
-	    }
-	    cout << "match_index = " << index + avail - 2 * sizeof(int);
-	    cout << "n = " << n << endl;
-	    cout << "avail - " << avail << endl;
-	    cout << "ptrdiff_t: diff = " << diff << endl;
-	    cout << "x.allocate(n): n = " << n << endl;
-	    //cout << "view(a[0]) after allocate: " << view(a[0]) << endl;
-	    cout << "view(a[avail - 8]) = " << view(a[avail - 8]) << endl;
-	  
-	    if (n + 8 < 100) { 
-	        //view( a[n + 8] ) = diff;
-	        //view( a[n + 8 + diff + 4] ) = diff;
-	    	
-		view(n + 8) = diff;
-		view(n + 8 + diff + 4) = diff;
-	    	cout << "view( a[n + 8] ) = " << view( a[n + 8] ) << endl;
-	    	cout << "view( a[n + 8 + diff + 4] ) = " << view( a[n + 8 + diff + 4]) << endl;
-
-	    }
-	    //cout << "view(a[0]) end func = " << view(a[0]) << endl;
-	    cout << "return allocate index = " << index << endl;
-*/
 	    assert(valid());
 	    return (pointer) (a + index + 4); 
-            //return 0; // Replace!
 	}                   
 
         // ---------
@@ -299,7 +229,99 @@ class Allocator {
          */
         void deallocate (pointer p, size_type) {
             // <your code>
-            assert(valid());}
+	    
+	    cout << endl << "x.DEALLOCATE()-----------------" << endl;
+	    bool no_neigh = false;
+	    bool both_neigh = false;
+	    bool right_neigh = true;
+	    bool left_neigh = true;
+
+	    char* p_cast = reinterpret_cast<char*> (p);
+
+	    int front_senti = view_ch( *(p_cast - 4) );
+	    int abs_front_senti = std::abs(front_senti);
+	    int end_senti = view_ch( *(p_cast + abs_front_senti) );
+
+	    int abs_end_senti = std::abs(end_senti);
+	    cout << "front_senti = " << front_senti << endl;
+	    cout << "end_senti = " << end_senti << endl;
+
+
+	    int left_adj = view_ch( *(p_cast - 2 * sizeof(int)) );
+	    int right_adj = view_ch( *(p_cast + abs_front_senti + sizeof(int)) );
+	    cout << "left = " << left_adj << endl;
+	    cout << "right = " << right_adj << endl;
+
+	    if (front_senti == view_ch(*a) || left_adj < 0)
+		left_neigh = false;
+	    if (end_senti == view_ch(*(a + N)) || right_adj < 0)
+	 	right_neigh = false;
+	    if (!left_neigh && !right_neigh)
+		no_neigh = true;
+	    if (left_neigh && right_neigh)
+		both_neigh = true;
+
+	    cout << "left neighbor = " << left_neigh << endl;
+	    cout << "right_neighbor = " << right_neigh << endl;
+	    cout << "no_neighbor = " << no_neigh << endl;
+	    cout << "both_neighbor = " << both_neigh << endl;
+
+	    int avail = abs_front_senti;
+	    cout << "avail = " << avail << endl;
+
+	    ptrdiff_t p_begin = p_cast - a - sizeof(int);
+	    ptrdiff_t p_back = p_begin + abs_front_senti + sizeof(int);
+
+	    cout << "ptrdiff_t p_index = " << p_begin << endl;
+	    cout << "p_begin = " << p_begin << endl;
+	    cout << "p_back = " << p_back << endl;
+
+	    if (no_neigh) {
+		cout << "NONE" << endl;
+		view(p_begin) = abs_front_senti;
+		view(p_back) = abs_end_senti;
+		cout << "view(p_begin) = " << view(p_begin) << endl;
+		cout << "view(p_back) = " << view(p_back) << endl;
+						
+	    }	       
+	    else if (left_neigh && !right_neigh) {
+		cout << "LEFT" << endl;
+		avail += left_adj;
+		ptrdiff_t newindex = p_begin - std::abs(left_adj) - 3 * sizeof(int);
+		view(newindex) = avail;
+		view(p_back) = avail;
+	 	cout << "new index = " << newindex << endl;
+		cout << "avail = " << avail << endl;
+		cout << "view(newindex) = " << view(newindex) << endl;
+		cout << "view(p_back) = " << view(p_back) << endl;
+	    } 
+	    else if (right_neigh && !left_neigh) {
+		cout << "RIGHT" << endl;
+		avail += right_adj + (2 * sizeof(int));
+		ptrdiff_t newindex = p_back + right_adj + 2 * sizeof(int);
+		view(p_begin) = avail;
+		view(newindex) = avail;
+		cout << "new index = " << newindex << endl;
+		cout << "avail = " << avail << endl;
+		cout << "view(newindex) = " << view(newindex) << endl;
+		cout << "view(p_begin) = " << view(p_begin) << endl;
+	    }
+	    else {
+		avail += left_adj + right_adj;
+		ptrdiff_t right_index = p_back + right_adj + 2 * sizeof(int);
+	  	ptrdiff_t left_index = p_begin - left_adj - 3 * sizeof(int);
+		view(right_index) = avail;
+		view(left_index) = avail;
+		cout << "new index right = " << right_index << endl;
+		cout << "new index left = " << left_index << endl;
+		cout << "avail = " << avail << endl;
+		cout << "view(right_index) = " << view(right_index) << endl;
+		cout << "view(left_index) = " << view(left_index) << endl;
+	    }
+
+            assert(valid());
+
+	}
 
         // -------
         // destroy

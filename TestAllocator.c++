@@ -49,6 +49,7 @@ typedef testing::Types<
 TYPED_TEST_CASE(TestAllocator, my_types);
 
 // downing test
+/*
 TYPED_TEST(TestAllocator, One) {
     typedef typename TestFixture::allocator_type  allocator_type;
     typedef typename TestFixture::value_type      value_type;
@@ -66,6 +67,7 @@ TYPED_TEST(TestAllocator, One) {
         x.deallocate(p, s);
     }
 }
+*/
 
 /*
 TYPED_TEST(TestAllocator, Two) {
@@ -77,36 +79,18 @@ TYPED_TEST(TestAllocator, Two) {
 
     allocator_type x;
 
-    const difference_type s = 40;
+    const difference_type s = 5;
     //cout << "s: " << s << endl;    
     const value_type v = 2;
     const pointer p = x.allocate(s);
 
-    //value_type* ip = reinterpret_cast<value_type*> (p);
-    //cout << "p: " << p << endl;
-    //cout << "*p: " << *p << endl;
-
     if (p != 0) {
 	x.construct(p, v);
 	ASSERT_EQ(v, *p);
-	//v = 3;
-	x.construct(p, v);
-	ASSERT_EQ(v, *p);
+	x.destroy(p);
+	x.deallocate(p, s);
     }
 
-//    const difference_type s2 = 24;
-//    const value_type v2 = 3;
-//    const pointer p2 = x.allocate(s2);
-//
-//    if ( p != 0 ) {
-//
-//	x.construct(p2, v2);
-//	ASSERT_EQ(v2, *p2);
-//    }
-	
-    //int test = *reinterpret_cast<int*> (p); 
-    //ASSERT_TRUE(test == 92);  
-  
 }
 */
 
@@ -134,6 +118,8 @@ TYPED_TEST(TestAllocator, three) {
     if (p != 0) {
 	x.construct(p2, v2);
 	ASSERT_EQ(v2, *p2);
+	x.destroy(p);
+	x.deallocate(p2, s);
     }
 
 }
@@ -170,20 +156,7 @@ TYPED_TEST(TestAllocator, Ten) {
         x.deallocate(b, s);
     }
 }
-
-
-*/
-
-
-TYPED_TEST(TestAllocator, Eleven) {
-
-    int index = 0;
-    //a_test[0] = 0;
-    //char eletest = a_test[0];
-    //int ch_inttest = view(eletest);
-    ASSERT_TRUE(true);
-
-}
+*/ 
 
 
 
