@@ -124,7 +124,9 @@ class Allocator {
             return *reinterpret_cast<int*>(&a[i]);
 	}
 	
-
+	int& view_ch(char& c) {
+	    return *reinterpret_cast<int*>(&c);
+	}
 
     public:
         // ------------
@@ -382,6 +384,10 @@ class Allocator {
          */
         const int& view (int i) const {
             return *reinterpret_cast<const int*>(&a[i]);
+	}
+
+	int view_ch(const char& c) const {
+	    return *reinterpret_cast<const int*>(&c);
 	}
 
 };
