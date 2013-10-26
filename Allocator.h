@@ -72,7 +72,7 @@ class Allocator {
         /**
          * O(1) in space
          * O(n) in time
-         * <your documentation>
+         * @return true if sentinals are correctly place within the heap 
          */
         bool valid () const {
             // <your code>
@@ -117,15 +117,14 @@ class Allocator {
         /**
          * O(1) in space
          * O(1) in time
-         * <your documentation>
+         * @param index for the heap char array
+	 * @return value at index i represented as an int
          */
         int& view (int i) {
             return *reinterpret_cast<int*>(&a[i]);
 	}
 	
-	int& view_ch (char& c) {
-	    return *reinterpret_cast<int*>(&c);
-	}
+
 
     public:
         // ------------
@@ -135,7 +134,7 @@ class Allocator {
         /**
          * O(1) in space
          * O(1) in time
-         * <your documentation>
+         * Allocator constructor
          */
         Allocator () {
             // <your code>
@@ -159,10 +158,12 @@ class Allocator {
         /**
          * O(1) in space
          * O(n) in time
-         * <your documentation>
+         * 
          * after allocation there must be enough space left for a valid block
          * the smallest allowable block is sizeof(T) + (2 * sizeof(int))
          * choose the first block that fits
+	 * @param number of bytes to allocate 
+	 * @return pointer to next available space in memory
          */
         pointer allocate (size_type n) {
             // <your code>
@@ -241,7 +242,8 @@ class Allocator {
         /**
          * O(1) in space
          * O(1) in time
-         * <your documentation>
+         * @param p pointer to available memory
+	 * @param v value to construct at pointer p 
          */
         void construct (pointer p, const_reference v) {
             new (p) T(v);                               // this is correct and exempt
@@ -254,7 +256,9 @@ class Allocator {
         /**
          * O(1) in space
          * O(1) in time
-         * <your documentation>
+         * @param pointer p to first available space to deallocate
+	 * @param size_type not used
+	 * @return void 
          * after deallocation adjacent free blocks must be coalesced
          */
         void deallocate (pointer p, size_type) {
@@ -361,7 +365,8 @@ class Allocator {
         /**
          * O(1) in space
          * O(1) in time
-         * <your documentation>
+         * @param pointer p to space in memory to destroy value
+	 * @return void 
          */
         void destroy (pointer p) {
             p->~T();               // this is correct
@@ -372,15 +377,13 @@ class Allocator {
         /**
          * O(1) in space
          * O(1) in time
-         * <your documentation>
+         * @param int i index within heap char array
+	 * @return int representation for char array at index i 
          */
         const int& view (int i) const {
             return *reinterpret_cast<const int*>(&a[i]);
 	}
 
-	int view_ch (const char& c) const {
-	    return *reinterpret_cast<const int*>(&c);
-	}
 };
 
 #endif // Allocator_h
