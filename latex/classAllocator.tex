@@ -1,0 +1,154 @@
+\hypertarget{classAllocator}{\section{\-Allocator$<$ \-T, \-N $>$ \-Class \-Template \-Reference}
+\label{classAllocator}\index{\-Allocator$<$ T, N $>$@{\-Allocator$<$ T, N $>$}}
+}
+\subsection*{\-Public \-Types}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classAllocator_ad5c51a128db2150e67259f697ef457b9}{typedef \-T {\bfseries value\-\_\-type}}\label{classAllocator_ad5c51a128db2150e67259f697ef457b9}
+
+\item 
+\hypertarget{classAllocator_aec4c70d3e80d2b7d11bbb8bd8a62f016}{typedef std\-::size\-\_\-t {\bfseries size\-\_\-type}}\label{classAllocator_aec4c70d3e80d2b7d11bbb8bd8a62f016}
+
+\item 
+\hypertarget{classAllocator_a6b650764260187e63d5098f5f38046c2}{typedef std\-::ptrdiff\-\_\-t {\bfseries difference\-\_\-type}}\label{classAllocator_a6b650764260187e63d5098f5f38046c2}
+
+\item 
+\hypertarget{classAllocator_a7df4693123ad6d168217e3853cd15495}{typedef value\-\_\-type $\ast$ {\bfseries pointer}}\label{classAllocator_a7df4693123ad6d168217e3853cd15495}
+
+\item 
+\hypertarget{classAllocator_a5815a9c01f756005eb19d0ae5aded3be}{typedef const value\-\_\-type $\ast$ {\bfseries const\-\_\-pointer}}\label{classAllocator_a5815a9c01f756005eb19d0ae5aded3be}
+
+\item 
+\hypertarget{classAllocator_adf0658602f352de03fa2d2c4f23903e9}{typedef value\-\_\-type \& {\bfseries reference}}\label{classAllocator_adf0658602f352de03fa2d2c4f23903e9}
+
+\item 
+\hypertarget{classAllocator_aff863afcf191fb225997ae2d51314bf5}{typedef const value\-\_\-type \& {\bfseries const\-\_\-reference}}\label{classAllocator_aff863afcf191fb225997ae2d51314bf5}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classAllocator_a4e2bf5fbf94e2206bb72b71ad4b7ffb3}{\-Allocator} ()
+\item 
+pointer \hyperlink{classAllocator_a8a19b7b675f5434c28c68fb15de86f36}{allocate} (size\-\_\-type n)
+\item 
+void \hyperlink{classAllocator_a6e6a26ece248be1eb76ed691c085cd65}{construct} (pointer p, const\-\_\-reference v)
+\item 
+void \hyperlink{classAllocator_a8823b257191f53d7f1efac9332d8f61a}{deallocate} (pointer p, size\-\_\-type)
+\item 
+void \hyperlink{classAllocator_af156a6a50a8c62c70e40cf342a3b64cb}{destroy} (pointer p)
+\item 
+const int \& \hyperlink{classAllocator_aad1b14fd9a73456468cf0c8dfb62c211}{view} (int i) const 
+\item 
+\hypertarget{classAllocator_a2e1c1adee082d4e68be600487f9f4418}{int {\bfseries view\-\_\-ch} (const char \&c) const }\label{classAllocator_a2e1c1adee082d4e68be600487f9f4418}
+
+\end{DoxyCompactItemize}
+\subsection*{\-Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classAllocator_ad178871e3d4888c233e0a39e2fe36982}{bool {\bfseries operator==} (const \hyperlink{classAllocator}{\-Allocator} \&, const \hyperlink{classAllocator}{\-Allocator} \&)}\label{classAllocator_ad178871e3d4888c233e0a39e2fe36982}
+
+\item 
+\hypertarget{classAllocator_aa59693ec7b26e5ee0a2a4bc71db20040}{bool {\bfseries operator!=} (const \hyperlink{classAllocator}{\-Allocator} \&lhs, const \hyperlink{classAllocator}{\-Allocator} \&rhs)}\label{classAllocator_aa59693ec7b26e5ee0a2a4bc71db20040}
+
+\end{DoxyCompactItemize}
+\subsubsection*{template$<$typename T, int \-N$>$ class Allocator$<$ T, N $>$}
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classAllocator_a4e2bf5fbf94e2206bb72b71ad4b7ffb3}{\index{\-Allocator@{\-Allocator}!\-Allocator@{\-Allocator}}
+\index{\-Allocator@{\-Allocator}!Allocator@{\-Allocator}}
+\subsubsection[{\-Allocator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-N$>$ {\bf \-Allocator}$<$ \-T, \-N $>$\-::{\bf \-Allocator} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classAllocator_a4e2bf5fbf94e2206bb72b71ad4b7ffb3}
+\-O(1) in space \-O(1) in time \hyperlink{classAllocator}{\-Allocator} constructor 
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classAllocator_a8a19b7b675f5434c28c68fb15de86f36}{\index{\-Allocator@{\-Allocator}!allocate@{allocate}}
+\index{allocate@{allocate}!Allocator@{\-Allocator}}
+\subsubsection[{allocate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-N$>$ pointer {\bf \-Allocator}$<$ \-T, \-N $>$\-::{\bf allocate} (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-type}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classAllocator_a8a19b7b675f5434c28c68fb15de86f36}
+\-O(1) in space \-O(n) in time
+
+after allocation there must be enough space left for a valid block the smallest allowable block is sizeof(\-T) + (2 $\ast$ sizeof(int)) choose the first block that fits 
+\begin{DoxyParams}{\-Parameters}
+{\em number} & of bytes to allocate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+pointer to next available space in memory 
+\end{DoxyReturn}
+\hypertarget{classAllocator_a6e6a26ece248be1eb76ed691c085cd65}{\index{\-Allocator@{\-Allocator}!construct@{construct}}
+\index{construct@{construct}!Allocator@{\-Allocator}}
+\subsubsection[{construct}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-N$>$ void {\bf \-Allocator}$<$ \-T, \-N $>$\-::{\bf construct} (
+\begin{DoxyParamCaption}
+\item[{pointer}]{p, }
+\item[{const\-\_\-reference}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classAllocator_a6e6a26ece248be1eb76ed691c085cd65}
+\-O(1) in space \-O(1) in time 
+\begin{DoxyParams}{\-Parameters}
+{\em p} & pointer to available memory \\
+\hline
+{\em v} & value to construct at pointer p \\
+\hline
+\end{DoxyParams}
+\hypertarget{classAllocator_a8823b257191f53d7f1efac9332d8f61a}{\index{\-Allocator@{\-Allocator}!deallocate@{deallocate}}
+\index{deallocate@{deallocate}!Allocator@{\-Allocator}}
+\subsubsection[{deallocate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-N$>$ void {\bf \-Allocator}$<$ \-T, \-N $>$\-::{\bf deallocate} (
+\begin{DoxyParamCaption}
+\item[{pointer}]{p, }
+\item[{size\-\_\-type}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classAllocator_a8823b257191f53d7f1efac9332d8f61a}
+\-O(1) in space \-O(1) in time 
+\begin{DoxyParams}{\-Parameters}
+{\em pointer} & p to first available space to deallocate \\
+\hline
+{\em size\-\_\-type} & not used \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+void after deallocation adjacent free blocks must be coalesced 
+\end{DoxyReturn}
+\hypertarget{classAllocator_af156a6a50a8c62c70e40cf342a3b64cb}{\index{\-Allocator@{\-Allocator}!destroy@{destroy}}
+\index{destroy@{destroy}!Allocator@{\-Allocator}}
+\subsubsection[{destroy}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-N$>$ void {\bf \-Allocator}$<$ \-T, \-N $>$\-::{\bf destroy} (
+\begin{DoxyParamCaption}
+\item[{pointer}]{p}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classAllocator_af156a6a50a8c62c70e40cf342a3b64cb}
+\-O(1) in space \-O(1) in time 
+\begin{DoxyParams}{\-Parameters}
+{\em pointer} & p to space in memory to destroy value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{classAllocator_aad1b14fd9a73456468cf0c8dfb62c211}{\index{\-Allocator@{\-Allocator}!view@{view}}
+\index{view@{view}!Allocator@{\-Allocator}}
+\subsubsection[{view}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , int \-N$>$ const int\& {\bf \-Allocator}$<$ \-T, \-N $>$\-::view (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  \mbox{[}inline\mbox{]}}}}\label{classAllocator_aad1b14fd9a73456468cf0c8dfb62c211}
+\-O(1) in space \-O(1) in time 
+\begin{DoxyParams}{\-Parameters}
+{\em int} & i index within heap char array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+int representation for char array at index i 
+\end{DoxyReturn}
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Allocator.\-h\end{DoxyCompactItemize}
