@@ -69,6 +69,33 @@ TYPED_TEST(TestAllocator, One) {
 }
 */
 
+TYPED_TEST(TestAllocator, t) {
+
+    typedef typename TestFixture::allocator_type allocator_type;
+    typedef typename TestFixture::value_type value_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer pointer;
+
+    allocator_type x;
+
+    const difference_type s = 5;
+    //cout << "s: " << s << endl;    
+    const value_type v = 2;
+    const pointer p = x.allocate(s);
+
+    if (p != 0) {
+	x.construct(p, v);
+	ASSERT_EQ(v, *p);
+    }
+    const difference_type s2 = 4;
+    const pointer p2 = x.allocate(s2);
+/*
+    const difference_type s3 = 1;
+    const pointer p3 = x.allocate(s3);
+    cout << "pointer test = " << p3 << endl;
+*/
+}
+
 /*
 TYPED_TEST(TestAllocator, Two) {
 
@@ -94,6 +121,7 @@ TYPED_TEST(TestAllocator, Two) {
 }
 */
 
+/*
 TYPED_TEST(TestAllocator, three) {
 
     typedef typename TestFixture::allocator_type  allocator_type;
@@ -123,6 +151,38 @@ TYPED_TEST(TestAllocator, three) {
     }
 
 }
+
+TYPED_TEST(TestAllocator, four) {
+
+    typedef typename TestFixture::allocator_type  allocator_type;
+    typedef typename TestFixture::value_type      value_type;
+    typedef typename TestFixture::difference_type difference_type;
+    typedef typename TestFixture::pointer         pointer;
+
+    allocator_type x;
+    const difference_type s = 5;
+    const value_type      v = 2;
+    const pointer         p = x.allocate(s);
+    if (p != 0) {
+        x.construct(p, v);
+        ASSERT_EQ(v, *p);
+        //x.destroy(p);
+        //x.deallocate(p, s);
+    }   
+
+    const difference_type s2 = 3;
+    const value_type v2 = 3;
+    const pointer p2 = x.allocate(s2);
+    if (p != 0) {
+	x.construct(p2, v2);
+	ASSERT_EQ(v2, *p2);
+	x.destroy(p);
+	x.deallocate(p, s);
+	x.destroy(p2);
+	x.deallocate(p2, s);
+    }   
+}
+*/
 
 // downing test
 /*

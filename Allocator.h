@@ -168,7 +168,11 @@ class Allocator {
 	    cout << "x.ALLOCATE(n) ------------ " << endl;
 	    cout << "x.allocate(" << n << ") = " << view(0) << endl;
 	    size_type malloc_size = sizeof(T) * n;
+	    size_type total_malloc_size = malloc_size + 2 * sizeof(int);
+	    cout << "malloc_size = " << malloc_size << endl;
+	    cout << "total_malloc_size = " << total_malloc_size << endl;
 	    int senti_it = view(0);
+	    bool no_space = false;
 	    int abs_senti_it = std::abs( senti_it );
 	    int index = 0;
 	    int neg_msize = -malloc_size;
@@ -185,17 +189,37 @@ class Allocator {
 	    match_index += malloc_size + sizeof(int);
 	    //cout << "match_index = " << match_index << endl;
 	    int abs_n= std::abs(malloc_size);
+
+	    int next_free_index = index + malloc_size + 2 * sizeof(int);
+	    cout << "next_free_index = " << next_free_index << endl;
+	    int avail = N - next_free_index - 2 * sizeof(int);
+	    cout << "avail heap left = " << avail << endl;
+
+	    if (total_malloc_size > avail + malloc_size + 2 * sizeof(int)) 
+		return 0;
+	    if (avail < sizeof(T) + 2 * sizeof(int)) {
+		int test_neg_msize = neg_msize; 
+		test_neg_msize = test_neg_msize - avail - (2 * sizeof(int));
+	  	cout << "test_neg_msize = " << test_neg_msize << endl;
+		no_space = true;
+		cout << "new index = " << index << endl;
+		int test_match_index = match_index;
+		test_match_index += avail + 2 * sizeof(int);
+		cout << "new match_index = " << match_index << endl;
+		cout << "test_match_index = " << test_match_index << endl;
+		neg_msize = test_neg_msize;
+		match_index = test_match_index;
+	    }
+
 	    view(index) = neg_msize;
 	    view(match_index) = neg_msize;
 	    //cout << "view(index) = " << view(index) << endl;
 	    //cout << "view(match_index) = " << view(match_index) << endl; 
-	    int next_free_index = index + malloc_size + 2 * sizeof(int);
-	    //cout << "next_free_index = " << next_free_index << endl;
-	    int avail = N - next_free_index - 2 * sizeof(int);
-	    //cout << "avail heap left = " << avail << endl;
-	    view(next_free_index) = avail;
-	    view(next_free_index + avail) = avail;
 
+	    if(!no_space) {
+	        view(next_free_index) = avail;
+	        view(next_free_index + avail) = avail;
+	    }
 	    cout << view(next_free_index) << endl;
 	    cout << "next_free_index + avail = " << next_free_index + avail << endl;
 	    cout << view(next_free_index + avail) << endl << endl;
@@ -307,9 +331,10 @@ class Allocator {
 		cout << "view(p_begin) = " << view(p_begin) << endl;
 	    }
 	    else {
-		avail += left_adj + right_adj;
+		cout << "BOTH NEIGHBORS" << endl;
+		avail += left_adj + right_adj + 2 * sizeof(int) + 2 * sizeof(int);
 		ptrdiff_t right_index = p_back + right_adj + 2 * sizeof(int);
-	  	ptrdiff_t left_index = p_begin - left_adj - 3 * sizeof(int);
+	  	ptrdiff_t left_index = p_begin - left_adj - 2 * sizeof(int);
 		view(right_index) = avail;
 		view(left_index) = avail;
 		cout << "new index right = " << right_index << endl;
